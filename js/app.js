@@ -14,6 +14,15 @@ function Product(name,src,timesShown,timesChosen){
 
   Product.all.push(this);
 }
+function random(){
+  var p1=Product.all[Math.floor(Math.random()*20)];
+  var p2=Product.all[Math.floor(Math.random()*20)];
+  var p3=Product.all[Math.floor(Math.random()*20)];
+  if (p1==p2||p1==p3||p2==p3){
+    random();
+  }
+  return p1,p2,p3;
+}
 
 function initialize(){
   new Product("bag","img/bag.jpg",0,0);
@@ -37,12 +46,13 @@ function initialize(){
   new Product("water-can","img/water-can.jpg",0,0);
   new Product("wine-glass","img/wine-glass",0,0);
   console.log(Product.all);
-  console.log(random());
+  random();
+  if (p1==p2||p1==p3||p2==p3){
+    console.error("Same stuff");
+  }
 }
 
-function random(){
-  return Math.ceil(Math.random()*20);
-}
+
 
 
 Product.all=[];
