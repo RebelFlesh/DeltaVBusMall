@@ -12,6 +12,7 @@ var p1=undefined,
 }
 */
 function Product(name,src,timesShown,timesChosen){
+  //creates products and adds them to an array
   this.name=name;
   this.src=src;
   this.timesShown=timesShown;
@@ -22,6 +23,7 @@ function Product(name,src,timesShown,timesChosen){
 Product.all=[];
 
 function random(){
+  //picks random product from array
   p1=Product.all[Math.floor(Math.random()*20)];
   p2=Product.all[Math.floor(Math.random()*20)];
   p3=Product.all[Math.floor(Math.random()*20)];
@@ -35,6 +37,7 @@ function setup(){
   var img1=document.getElementById("P1");
   var img2=document.getElementById("P2");
   var img3=document.getElementById("P3");
+  //insert product src as img src
   img1.src=p1.src;
   p1.timesShown++;
   img2.src=p2.src;
@@ -45,6 +48,7 @@ function setup(){
 }
 
 function initialize(){
+  //makes all products and sets up form
   new Product("bag","img/bag.jpg",0,0);
   new Product("banana","img/banana.jpg",0,0);
   new Product("bathroom","img/bathroom.jpg",0,0);
@@ -73,10 +77,13 @@ function initialize(){
 initialize();
 
 function handleSubmit(event){
+  //when submit, timesChosen++, add new products.
   event.preventDefault();
-
+  
   window[event.target.vote.value].timesChosen++;
-
+  event.target.querySelector("input:checked").checked = false;
+  random();
+  setup();
 }
 
 var form=document.querySelector("form");
