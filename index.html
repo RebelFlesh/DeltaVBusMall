@@ -22,13 +22,13 @@
       <form>
         <fieldset>
           <div>
-            <label><input type="radio"><img id="P1"/></label>
+            <label><input type="radio" name="vote" value="p1"><img id="P1"/></label>
           </div>
           <div>
-            <label><input type="radio"><img id="P2"/></label>
+            <label><input type="radio" name="vote" value="p2"><img id="P2"/></label>
           </div>
           <div>
-            <label><input type="radio"><img id="P3"/></label>
+            <label><input type="radio" name="vote" value="p3"><img id="P3"/></label>
           </div>
           <div id="vote">
             <label><input type="submit">vote!</label>
@@ -41,11 +41,12 @@
       <p>You are invited to participate in our online BusMall survey! In order to better provide our customers a varietty of products that are both interesting and useful. Please choose above which product you would be most likely to buy. After 25 submission you will be presented with which products you were most interested in and can see what others chose as well! Once completed, you will be given a free promo code for a discount on any of our current or future BusMall items! </p>
     </article>
     <aside id="results">
-
+      <canvas id="results-Canvas"></canvas>
     </aside>
     <footer>
 
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

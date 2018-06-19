@@ -57,12 +57,26 @@ function initialize(){
   if (p1===p2||p1===p3||p2===p3){
     console.error("Same stuff");
   }
-  var P1=document.getElementById("P1");
-  var P2=document.getElementById("P2");
-  var P3=document.getElementById("P3");
-  P1.src=p1.src;
-  P2.src=p2.src;
-  P3.src=p3.src;
+  var img1=document.getElementById("P1");
+  var img2=document.getElementById("P2");
+  var img3=document.getElementById("P3");
+  img1.src=p1.src;
+  p1.timesShown++;
+  img2.src=p2.src;
+  p2.timesShown++;
+  img3.src=p3.src;
+  p3.timesShown++;
+  console.log(p3);
 }
 
 initialize();
+
+function handleSubmit(event){
+  event.preventDefault();
+
+  window[event.target.vote.value].timesChosen++;
+
+}
+
+var form=document.querySelector("form");
+form.addEventListener("submit",handleSubmit);
