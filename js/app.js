@@ -31,6 +31,19 @@ function random(){
   return p1,p2,p3;
 }
 
+function setup(){
+  var img1=document.getElementById("P1");
+  var img2=document.getElementById("P2");
+  var img3=document.getElementById("P3");
+  img1.src=p1.src;
+  p1.timesShown++;
+  img2.src=p2.src;
+  p2.timesShown++;
+  img3.src=p3.src;
+  p3.timesShown++;
+  console.log(p3);
+}
+
 function initialize(){
   new Product("bag","img/bag.jpg",0,0);
   new Product("banana","img/banana.jpg",0,0);
@@ -54,19 +67,7 @@ function initialize(){
   new Product("wine-glass","img/wine-glass.jpg",0,0);
   console.log(Product.all);
   random();
-  if (p1===p2||p1===p3||p2===p3){
-    console.error("Same stuff");
-  }
-  var img1=document.getElementById("P1");
-  var img2=document.getElementById("P2");
-  var img3=document.getElementById("P3");
-  img1.src=p1.src;
-  p1.timesShown++;
-  img2.src=p2.src;
-  p2.timesShown++;
-  img3.src=p3.src;
-  p3.timesShown++;
-  console.log(p3);
+  setup();
 }
 
 initialize();
