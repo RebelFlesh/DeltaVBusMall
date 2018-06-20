@@ -1,8 +1,9 @@
 "use strict";
 
-var p1=undefined,
-  p2=undefined,
-  p3=undefined;
+var product1=undefined,
+  product2=undefined,
+  product3=undefined,
+  votes=0;
 
 /*function site(){
   initialize();
@@ -24,13 +25,13 @@ Product.all=[];
 
 function random(){
   //picks random product from array
-  p1=Product.all[Math.floor(Math.random()*20)];
-  p2=Product.all[Math.floor(Math.random()*20)];
-  p3=Product.all[Math.floor(Math.random()*20)];
-  if (p1===p2||p1===p3||p2===p3){
+  product1=Product.all[Math.floor(Math.random()*20)];
+  product2=Product.all[Math.floor(Math.random()*20)];
+  product3=Product.all[Math.floor(Math.random()*20)];
+  if (product1===product2||product1===product3||product2===product3){
     random();
   }
-  return p1,p2,p3;
+  return product1,product2,product3;
 }
 
 function setup(){
@@ -38,13 +39,13 @@ function setup(){
   var img2=document.getElementById("P2");
   var img3=document.getElementById("P3");
   //insert product src as img src
-  img1.src=p1.src;
-  p1.timesShown++;
-  img2.src=p2.src;
-  p2.timesShown++;
-  img3.src=p3.src;
-  p3.timesShown++;
-  console.log(p3);
+  img1.src=product1.src;
+  product1.timesShown++;
+  img2.src=product2.src;
+  product2.timesShown++;
+  img3.src=product3.src;
+  product3.timesShown++;
+  console.log(product3);
 }
 
 function initialize(){
@@ -75,16 +76,24 @@ function initialize(){
 }
 
 initialize();
+var form=document.querySelector("form");
+form.addEventListener("submit",handleSubmit);
+
+
 
 function handleSubmit(event){
   //when submit, timesChosen++, add new products.
   event.preventDefault();
-  
+  votes++;
   window[event.target.vote.value].timesChosen++;
   event.target.querySelector("input:checked").checked = false;
   random();
   setup();
+  console.log(votes);
+  if (votes===2){
+    form.removeEventListener("submit",handleSubmit);
+  
+  }
 }
 
-var form=document.querySelector("form");
-form.addEventListener("submit",handleSubmit);
+
