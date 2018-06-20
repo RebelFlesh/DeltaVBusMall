@@ -7,7 +7,7 @@
   </head>
   <body>
     <header>
-      <img title="logo"/>
+      <img src="img/bus-symbol-tobefree.svg"title="logo"/>
       <h1>BusMall</h1>
       <nav>
         <ul>
@@ -21,25 +21,25 @@
     <section>
       <form>
         <fieldset>
-          <div>
-            <label><input type="radio" name="vote" value="product1"><img id="P1"/></label>
+          <div class="radio">
+            <label><img id="P1"/><input type="radio" name="vote" value="product1"></label>
           </div>
-          <div>
-            <label><input type="radio" name="vote" value="product2"><img id="P2"/></label>
+          <div class="radio">
+            <label><img id="P2"/><input type="radio" name="vote" value="product2"></label>
           </div>
-          <div>
-            <label><input type="radio" name="vote" value="product3"><img id="P3"/></label>
+          <div class="radio">
+            <label><img id="P3"/><input type="radio" name="vote" value="product3"></label>
           </div>
           <div id="vote">
-            <label><input type="submit">vote!</label>
+            <label><input type="submit" value="Vote!"></label>
           </div>
         </fieldset>
       </form>
+      <article>
+        <h2>Welcome!</h2>
+        <p>You are invited to participate in our online BusMall survey! In order to better provide our customers a varietty of products that are both interesting and useful. Please choose above which product you would be most likely to buy. After 25 submission you will be presented with which products you were most interested in and can see what others chose as well! Once completed, you will be given a free promo code for a discount on any of our current or future BusMall items! </p>
+      </article>
     </section>
-    <article>
-      <h3>Welcome!</h3>
-      <p>You are invited to participate in our online BusMall survey! In order to better provide our customers a varietty of products that are both interesting and useful. Please choose above which product you would be most likely to buy. After 25 submission you will be presented with which products you were most interested in and can see what others chose as well! Once completed, you will be given a free promo code for a discount on any of our current or future BusMall items! </p>
-    </article>
     <aside id="results">
       <canvas id="results-Canvas"></canvas>
     </aside>
