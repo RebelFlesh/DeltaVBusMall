@@ -5,7 +5,37 @@ body{
   background-color:#f2f2f2;
 }
 header{
+  height:100px;
   background-color:#146eb4
+}
+h1{
+  display:inline-block;
+  font-size:2em;
+}
+header img{
+  box-sizing:border-box;
+  height:80%;
+  padding-top: 2%;
+  padding-left: 2%;
+}
+nav{
+  display:inline-block;
+  float:right;
+  margin-top:7%;
+  width:50%;
+}
+li{
+  display:inline-block;
+  width:23%;
+  box-sizing:border-box;
+  padding:1%;
+  background-color:#232f3e;
+  border:5px solid #000000;
+  text-align: center;
+  float: left;
+}
+li a{
+  color:#ff9900;
 }
 section{
   position: relative;
