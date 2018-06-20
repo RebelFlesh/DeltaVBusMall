@@ -1,60 +1,99 @@
 "use strict";
 
-function site(){
+var product1=undefined,
+  product2=undefined,
+  product3=undefined,
+  votes=0;
+
+/*function site(){
   initialize();
   handleSubmit();
   loadNew();
   showResult();
 }
+*/
 function Product(name,src,timesShown,timesChosen){
+  //creates products and adds them to an array
   this.name=name;
   this.src=src;
   this.timesShown=timesShown;
-  this.timesChosen=timesChosen
+  this.timesChosen=timesChosen;
 
   Product.all.push(this);
 }
+Product.all=[];
+
 function random(){
-  var p1=Product.all[Math.floor(Math.random()*20)];
-  var p2=Product.all[Math.floor(Math.random()*20)];
-  var p3=Product.all[Math.floor(Math.random()*20)];
-  if (p1==p2||p1==p3||p2==p3){
+  //picks random product from array
+  product1=Product.all[Math.floor(Math.random()*20)];
+  product2=Product.all[Math.floor(Math.random()*20)];
+  product3=Product.all[Math.floor(Math.random()*20)];
+  if (product1===product2||product1===product3||product2===product3){
     random();
   }
-  return p1,p2,p3;
+  return product1,product2,product3;
+}
+
+function setup(){
+  var img1=document.getElementById("P1");
+  var img2=document.getElementById("P2");
+  var img3=document.getElementById("P3");
+  //insert product src as img src
+  img1.src=product1.src;
+  product1.timesShown++;
+  img2.src=product2.src;
+  product2.timesShown++;
+  img3.src=product3.src;
+  product3.timesShown++;
+  console.log(product3);
 }
 
 function initialize(){
+  //makes all products and sets up form
   new Product("bag","img/bag.jpg",0,0);
   new Product("banana","img/banana.jpg",0,0);
   new Product("bathroom","img/bathroom.jpg",0,0);
   new Product("boots","img/boots.jpg",0,0);
-  new Product("breakfest","img/breakfest.jpg",0,0);
+  new Product("breakfest","img/breakfast.jpg",0,0);
   new Product("bubblegum","img/bubblegum.jpg",0,0);
   new Product("chair","img/chair.jpg",0,0);
-  new Product("cthulu","img/cthulu.jpg",0,0);
+  new Product("cthulu","img/cthulhu.jpg",0,0);
   new Product("dog-duck","img/dog-duck.jpg",0,0);
   new Product("dragon","img/dragon.jpg",0,0);
   new Product("pen","img/pen.jpg",0,0);
   new Product("pet-sweep","img/pet-sweep.jpg",0,0);
   new Product("scissors","img/scissors.jpg",0,0);
   new Product("shark","img/shark.jpg",0,0);
-  new Product("sweep","img/sweep.jpg",0,0);
+  new Product("sweep","img/sweep.png",0,0);
   new Product("tauntaun","img/tauntaun.jpg",0,0);
   new Product("unicorn","img/unicorn.jpg",0,0);
-  new Product("usb","img/usb",0,0);
+  new Product("usb","img/usb.gif",0,0);
   new Product("water-can","img/water-can.jpg",0,0);
-  new Product("wine-glass","img/wine-glass",0,0);
+  new Product("wine-glass","img/wine-glass.jpg",0,0);
   console.log(Product.all);
   random();
-  if (p1==p2||p1==p3||p2==p3){
-    console.error("Same stuff");
+  setup();
+}
+
+initialize();
+var form=document.querySelector("form");
+form.addEventListener("submit",handleSubmit);
+
+
+
+function handleSubmit(event){
+  //when submit, timesChosen++, add new products.
+  event.preventDefault();
+  votes++;
+  window[event.target.vote.value].timesChosen++;
+  event.target.querySelector("input:checked").checked = false;
+  random();
+  setup();
+  console.log(votes);
+  if (votes===2){
+    form.removeEventListener("submit",handleSubmit);
+  
   }
 }
 
 
-
-
-Product.all=[];
-
-initialize();
