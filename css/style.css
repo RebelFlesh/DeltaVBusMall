@@ -24,7 +24,7 @@ nav{
   margin-top:60px;
   width:50%;
 }
-li{
+nav li{
   display:inline-block;
   width:23%;
   box-sizing:border-box;

@@ -45,7 +45,6 @@ function setup(){
   product2.timesShown++;
   img3.src=product3.src;
   product3.timesShown++;
-  console.log(product3);
 }
 
 function initialize(){
@@ -79,8 +78,6 @@ initialize();
 var form=document.querySelector("form");
 form.addEventListener("submit",handleSubmit);
 
-
-
 function handleSubmit(event){
   //when submit, timesChosen++, add new products.
   event.preventDefault();
@@ -89,11 +86,64 @@ function handleSubmit(event){
   event.target.querySelector("input:checked").checked = false;
   random();
   setup();
-  console.log(votes);
-  if (votes===2){
+  if (votes===25){
     form.removeEventListener("submit",handleSubmit);
-  
+    results();
   }
 }
 
+function results(){
+  showList();
+  showChart();
+}
+
+function showList(){
+  var aside=document.querySelector("aside");
+  var ul=document.createElement("ul");
+  for(var i=0;i<Product.all.length;i++){
+    var li=document.createElement("li");
+    li.textContent=Product.all[i].timesChosen+" votes for "+Product.all[i].name;
+    ul.appendChild(li);
+  }
+  aside.appendChild(ul);
+}
+
+function showChart(){
+  var canvas =document.getElementById("results-Canvas");
+  canvas.style.display="block";
+
+  var labels=[];
+  var voteCounts=[];
+  for (var i=0;i < Product.all.length;i++){
+    labels[i]=Product.all[i].name;
+    voteCounts[i]=Product.all[i].timesChosen;
+  }
+
+  var ctx=canvas.getContext("2d");
+  new Chart(ctx,{
+    type:"bar",
+    data:{
+      labels:labels,
+      datasets:[{
+        label: "Vote Count",
+        backgroundColor: 'rgb(200,0,0,0.6)',
+        data: voteCounts,
+      }]
+    },
+    options:{
+      responsive:true,
+      scales:{
+        yAxes:[{
+          ticks:{
+            beginAtZero: true,
+          }
+        }]
+      },
+      title:{
+        display:true,
+        text: "Voting Results"
+      }
+    }
+  });
+}
 
