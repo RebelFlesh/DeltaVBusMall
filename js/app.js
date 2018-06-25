@@ -4,7 +4,42 @@ var product1=undefined,
   product2=undefined,
   product3=undefined,
   votes=0;
+  
 
+window.addEventListener("load", function onLoad() {
+  loadFromStorage();
+
+  if (Product.all.length === 0) {
+    initialize();
+  }
+  random();
+  setup();
+});
+
+function saveAll(){
+  localStorage["voteHistory"]=JSON.stringify({VoteHistory: Product.votes});
+  localStorage["products"]=JSON.stringify(Product.all);
+}
+function loadFromStorage(){
+  var jsonVoteHistoryString = localStorage["voteHistory"];
+  if (jsonVoteHistoryString) {
+    var voteHistory = JSON.parse(jsonVoteHistoryString);
+    Product.votes = voteHistory.votes;
+    console.log("setting timesChosen to " + Product.votes);
+  }
+
+  var jsonStringFromStorage = localStorage["products"];
+  if (!jsonStringFromStorage)
+    return;
+
+  Product.all = [];
+  var arrayFromStorage = JSON.parse(jsonStringFromStorage);
+  for(var i = 0; i < arrayFromStorage.length; i++) {
+    var arrayItem = arrayFromStorage[i];
+    new Product(arrayItem.name, arrayItem.src, arrayItem.timesShown, arrayItem.timesChosen);
+  }
+  console.log("fromStorage", Product.all);
+}
 /*function site(){
   initialize();
   handleSubmit();
@@ -21,7 +56,7 @@ function Product(name,src,timesShown,timesChosen){
 
   Product.all.push(this);
 }
-Product.all=[];
+
 
 function random(){
   //picks random product from array
@@ -48,6 +83,8 @@ function setup(){
 }
 
 function initialize(){
+  Product.all=[];
+  Product.votes=0;
   //makes all products and sets up form
   new Product("bag","img/bag.jpg",0,0);
   new Product("banana","img/banana.jpg",0,0);
@@ -69,24 +106,27 @@ function initialize(){
   new Product("usb","img/usb.gif",0,0);
   new Product("water-can","img/water-can.jpg",0,0);
   new Product("wine-glass","img/wine-glass.jpg",0,0);
-  console.log(Product.all);
   random();
   setup();
+  saveAll();
 }
 
-initialize();
 var form=document.querySelector("form");
 form.addEventListener("submit",handleSubmit);
 
 function handleSubmit(event){
   //when submit, timesChosen++, add new products.
   event.preventDefault();
+  Product.votes++;
   votes++;
+  console.log(Product.votes);
   window[event.target.vote.value].timesChosen++;
   event.target.querySelector("input:checked").checked = false;
   random();
   setup();
-  if (votes===25){
+  saveAll();
+  
+  if (Product.votes===25||votes===25){
     form.removeEventListener("submit",handleSubmit);
     results();
   }
